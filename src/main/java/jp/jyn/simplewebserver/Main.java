@@ -66,15 +66,17 @@ public class Main {
             "-p/--port         Specify port  (Ex: -p 8080, -p 0)",
             "-r/--root         Specify root  (Ex: -r ./webroot)",
             "-b/--bind         Bind address  (Ex: -b 127.0.0.1)",
+            "-c/--cache        Enable cache",
             "--help/--version  Show help and version",
             ""
         ).forEach(System.out::println);
     }
 
     public static class Option {
-        public String bind = null;
         public int port = 8080;
         public Path root = null;
+        public String bind = null;
+        public boolean cache = false;
         public boolean showVersion = true;
         private Option(Queue<String> args) {
             Consumer<String> setter = s -> {throw new IllegalArgumentException("Unknown option: " + s);};
@@ -97,7 +99,11 @@ public class Main {
                     case "--root":
                         setter = s -> root = Paths.get(s).normalize().toAbsolutePath();
                         break;
-                    case "--hide": // Secret option.
+                    case "-c":
+                    case "--cache":
+                        cache = true;
+                        break;
+                    case "--hide": // Secret option(This software is for "development". Don't use in "production".)
                         showVersion = false;
                         break;
                     default:

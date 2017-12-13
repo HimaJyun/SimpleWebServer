@@ -74,7 +74,7 @@ public class JettyInitializer {
             handlers.addHandler(rewrite);
         }
 
-        handlers.addHandler(createResourceHandler(option.showVersion, option.root, "index.html"));
+        handlers.addHandler(createResourceHandler(option.root, option.showVersion, !option.cache, "index.html"));
 
         server.setHandler(handlers);
         /* === Handler === */
@@ -96,16 +96,21 @@ public class JettyInitializer {
             .forEach(factory -> factory.getHttpConfiguration().setSendServerVersion(showVersion));
     }
 
-    private ResourceHandler createResourceHandler(boolean showIndexOf, Path webroot, String... index) {
+    private ResourceHandler createResourceHandler(Path webroot, boolean showIndexOf, boolean disableCache, String... index) {
         String root = webroot.toString();
         logger.info("Show directory list: {}", showIndexOf);
+        logger.info("Use cache: {}", !disableCache);
         logger.info("Web root: {}", root);
         logger.info("Index: {}", () -> String.join(",", index));
 
         ResourceHandler resource = new ResourceHandler();
-        resource.setDirectoriesListed(showIndexOf);
         resource.setResourceBase(root);
+        resource.setDirectoriesListed(showIndexOf);
         resource.setWelcomeFiles(index);
+
+        if (disableCache) {
+            resource.setCacheControl("private, no-store, no-cache, must-revalidate");
+        }
 
         return resource;
     }
