@@ -7,7 +7,7 @@
     <groupId>jp.jyn</groupId>
     <artifactId>SimpleWebServer</artifactId>
     <description>SimpleWebServer(SWS) is a local HTTP server for web development.</description>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

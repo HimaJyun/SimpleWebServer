@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="off">
     <Properties>
-        <Property name="layout">[%d{MM/dd HH:mm:ss}-%level/%c{1}]: %msg%n</Property>
+        <Property name="layout">[%level/%c{1}]: %msg%n</Property>
     </Properties>
 
     <Appenders>

@@ -109,7 +109,7 @@ public class JettyInitializer {
         resource.setWelcomeFiles(index);
 
         if (disableCache) {
-            resource.setCacheControl("private, no-store, no-cache, must-revalidate");
+            resource.setCacheControl("no-store");
         }
 
         return resource;

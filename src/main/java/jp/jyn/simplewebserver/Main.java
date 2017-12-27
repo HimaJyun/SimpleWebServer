@@ -75,7 +75,7 @@ public class Main {
     public static class Option {
         public int port = 8080;
         public Path root = null;
-        public String bind = null;
+        public String bind = "localhost";
         public boolean cache = false;
         public boolean showVersion = true;
         private Option(Queue<String> args) {
